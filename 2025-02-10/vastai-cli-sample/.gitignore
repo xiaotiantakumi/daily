@@ -1,0 +1,13 @@
+# 環境変数
+.env
+
+# ログファイル
+*.log
+
+# 検索結果
+search_results/
+list.md
+
+# OS生成ファイル
+.DS_Store
+Thumbs.db 
