@@ -1,5 +1,10 @@
 #!/bin/bash
-# エラーがあればスクリプトを停止
 set -eo pipefail
 
-ollama pull yuma/DeepSeek-R1-Distill-Qwen-Japanese:14b
+# Activate the main virtual environment
+. /venv/main/bin/activate
+
+cd "${WORKSPACE}/" 
+
+ollama pull hhao/qwen2.5-coder-tools:0.5b
+ollama pull hhao/qwen2.5-coder-tools:1.5b
