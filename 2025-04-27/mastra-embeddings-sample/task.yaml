@@ -1,0 +1,96 @@
+project:
+  name: mastra-embeddings-sample
+  description: OpenAIのEmbeddingsとPGVectorを使用したベクトルデータ学習サンプル
+
+objectives:
+  primary: ベクトルデータベースの基本的なCRUD操作の理解と実装
+  secondary:
+    - RAG（Retrieval Augmented Generation）への発展的な学習準備
+    - ベクトル検索の実践的な使用方法の習得
+
+features:
+  data_processing:
+    - 複数フォーマットのテキストデータ処理
+      - HTML
+      - Markdown
+      - Plain Text
+      - YAML
+    - OpenAI Embeddings APIを使用したベクトル化
+    - 効率的なバッチ処理の実装
+
+  database:
+    - PostgreSQLとpgvectorを使用
+    - テーブル設計の最適化
+    - メタデータとベクトルデータの効率的な格納
+
+  crud_operations:
+    create:
+      - 新規ドキュメントの追加
+      - ベクトル生成と保存
+    read:
+      - 類似度検索
+      - メタデータによるフィルタリング
+    update:
+      - ドキュメント内容の更新
+      - ベクトルの再計算
+    delete:
+      - ドキュメントの削除
+      - 関連ベクトルデータのクリーンアップ
+
+documentation:
+  readme:
+    - プロジェクトの概要と目的
+    - セットアップ手順
+    - 環境変数の設定方法
+    - 基本的な使用例とコードサンプル
+    - ベクトル検索のベストプラクティス
+    - パフォーマンスチューニングガイド
+    - トラブルシューティング
+
+development_environment:
+  - Docker Compose設定
+  - PostgreSQL + pgvector
+  - 環境変数管理
+  - TypeScript設定
+
+suggested_enhancements:
+  - バルクインサート/アップデート処理
+  - ベクトル検索のパフォーマンス最適化
+  - 類似度スコアの正規化と閾値設定
+  - キャッシング戦略
+  - エラーハンドリングとリトライ機構
+  - ベクトルデータの可視化機能
+  - 検索結果のスコアリング説明
+  - データ品質モニタリング
+  - APIエンドポイントのSwagger文書化
+  - ユニットテストとインテグレーションテスト
+  - CI/CDパイプライン設定
+
+progress:
+  interface_design:
+    - name: CRUDインターフェース設計
+      status: 未着手
+  data_processing:
+    - name: 入力データのパース
+      status: 未着手
+    - name: OpenAI埋め込み生成
+      status: 未着手
+  database:
+    - name: テーブル作成
+      status: 完了
+    - name: サンプルデータ挿入
+      status: 完了
+  crud_operations:
+    - name: Create
+      status: 未着手
+    - name: Read
+      status: 未着手
+    - name: Update
+      status: 未着手
+    - name: Delete
+      status: 未着手
+  documentation:
+    - name: README基本情報
+      status: 完了
+    - name: RAGやベクトル検索の詳細
+      status: 未着手
