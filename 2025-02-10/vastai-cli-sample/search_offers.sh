@@ -29,23 +29,36 @@ SEARCH_QUERY="gpu_ram>=${MIN_VRAM}"
 
 # GPU条件
 if [ ! -z "$GPU_PREFERENCE" ]; then
-    SEARCH_QUERY="$SEARCH_QUERY gpu_name = ${GPU_PREFERENCE}"
+    # アンダースコアをスペースに置換
+    GPU_NAME=$(echo "$GPU_PREFERENCE" | tr '_' ' ')
+    SEARCH_QUERY="$SEARCH_QUERY gpu_name=$GPU_NAME"
 fi
+
+# 価格条件
 if [ ! -z "$MAX_PRICE" ]; then
-    SEARCH_QUERY="$SEARCH_QUERY dph_total < ${MAX_PRICE}"
+    SEARCH_QUERY="$SEARCH_QUERY dph_total<${MAX_PRICE}"
 fi
 
 # 地域条件
 if [ ! -z "$LOCATION" ]; then
     # カンマで区切られた国コードを配列に変換
     IFS=',' read -r -a COUNTRIES <<< "$LOCATION"
-    COUNTRIES_LIST=$(printf "'%s'," "${COUNTRIES[@]}" | sed 's/,$//')
+    # 国コードを大文字のまま使用
+    COUNTRIES_LIST=""
+    for country in "${COUNTRIES[@]}"; do
+        # 前の要素がある場合はカンマを追加
+        if [ ! -z "$COUNTRIES_LIST" ]; then
+            COUNTRIES_LIST="$COUNTRIES_LIST,"
+        fi
+        # クォートなしで追加
+        COUNTRIES_LIST="$COUNTRIES_LIST${country}"
+    done
     SEARCH_QUERY="$SEARCH_QUERY geolocation in [${COUNTRIES_LIST}]"
 fi
 
 # オンデマンド条件
 if [ "$ON_DEMAND" = "1" ]; then
-    SEARCH_QUERY="$SEARCH_QUERY rented = False"
+    SEARCH_QUERY="$SEARCH_QUERY rented=False"
 fi
 
 # ソート順の設定
