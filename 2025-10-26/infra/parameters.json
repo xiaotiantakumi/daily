@@ -1,0 +1,33 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccountName": {
+            "value": "stazcopysample"
+        },
+        "blobContainerName": {
+            "value": "azcopy-container"
+        },
+        "fileShareName": {
+            "value": "azcopy-fileshare"
+        },
+        "location": {
+            "value": "Japan East"
+        },
+        "storageSku": {
+            "value": "Standard_LRS"
+        },
+        "storageKind": {
+            "value": "StorageV2"
+        },
+        "accessTier": {
+            "value": "Hot"
+        },
+        "blobPublicAccess": {
+            "value": "None"
+        },
+        "fileShareQuota": {
+            "value": 100
+        }
+    }
+}
