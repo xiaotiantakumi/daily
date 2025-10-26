@@ -11,31 +11,34 @@ STORAGE_ACCOUNT_NAME="stazcopysample"
 BLOB_CONTAINER_NAME="azcopy-container"
 FILE_SHARE_NAME="azcopy-fileshare"
 
-echo "=== AzCopy File Share to Blob Container ==="
-echo "ストレージアカウント: ${STORAGE_ACCOUNT_NAME}"
-echo "File Share: ${FILE_SHARE_NAME}"
-echo "Blob Container: ${BLOB_CONTAINER_NAME}"
-echo ""
+# echo "=== AzCopy File Share to Blob Container ==="
+# echo "ストレージアカウント: ${STORAGE_ACCOUNT_NAME}"
+# echo "File Share: ${FILE_SHARE_NAME}"
+# echo "Blob Container: ${BLOB_CONTAINER_NAME}"
+# echo ""
 
-# 環境変数チェック
-if [ -z "${FILE_SHARE_SAS_TOKEN}" ]; then
-    echo "✗ エラー: FILE_SHARE_SAS_TOKEN が設定されていません"
-    echo "事前に get-sas-tokens.sh を実行してください:"
-    echo "source ./get-sas-tokens.sh"
-    exit 1
-fi
+# # 環境変数チェック
+# if [ -z "${FILE_SHARE_SAS_TOKEN}" ]; then
+#     echo "✗ エラー: FILE_SHARE_SAS_TOKEN が設定されていません"
+#     echo "事前に get-sas-tokens.sh を実行してください:"
+#     echo "source ./get-sas-tokens.sh"
+#     exit 1
+# fi
 
-if [ -z "${BLOB_SAS_TOKEN}" ]; then
-    echo "✗ エラー: BLOB_SAS_TOKEN が設定されていません"
-    echo "事前に get-sas-tokens.sh を実行してください:"
-    echo "source ./get-sas-tokens.sh"
-    exit 1
-fi
+# if [ -z "${BLOB_SAS_TOKEN}" ]; then
+#     echo "✗ エラー: BLOB_SAS_TOKEN が設定されていません"
+#     echo "事前に get-sas-tokens.sh を実行してください:"
+#     echo "source ./get-sas-tokens.sh"
+#     exit 1
+# fi
 
-if [ -n "${SAS_EXPIRY_DATE}" ]; then
-    echo "SAS有効期限: ${SAS_EXPIRY_DATE}"
-fi
-echo ""
+# if [ -n "${SAS_EXPIRY_DATE}" ]; then
+#     echo "SAS有効期限: ${SAS_EXPIRY_DATE}"
+# fi
+# echo ""
+
+FILE_SHARE_SAS_TOKEN="sv=2024-11-04&ss=f&srt=sco&sp=rl&se=2025-10-27T04:22:51Z&st=2025-10-26T20:07:51Z&spr=https&sig=hoge"
+BLOB_SAS_TOKEN="sv=2024-11-04&ss=b&srt=sco&sp=rwdlactfx&se=2025-10-27T04:22:51Z&st=2025-10-26T20:07:51Z&spr=https&sig=hoge"
 
 # URL構築
 SOURCE_URL="https://${STORAGE_ACCOUNT_NAME}.file.core.windows.net/${FILE_SHARE_NAME}?${FILE_SHARE_SAS_TOKEN}"

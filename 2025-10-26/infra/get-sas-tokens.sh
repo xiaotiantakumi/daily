@@ -4,7 +4,7 @@
 # 使用方法: source ./get-sas-tokens.sh [有効期限日数]
 # 例: source ./get-sas-tokens.sh 7  # 7日間有効
 
-set -e
+# set -eは削除（source実行時に親シェルが終了しないように）
 
 # 設定
 STORAGE_ACCOUNT_NAME="stazcopysample"
@@ -42,7 +42,7 @@ echo "File Share用SASトークンを生成中..."
 FILE_SHARE_SAS_TOKEN=$(az storage share generate-sas \
     --account-name "${STORAGE_ACCOUNT_NAME}" \
     --name "${FILE_SHARE_NAME}" \
-    --permissions "rwdl" \
+    --permissions "rl" \
     --expiry "${EXPIRY_DATE}" \
     --output tsv)
 
@@ -59,7 +59,7 @@ echo "Blob Container用SASトークンを生成中..."
 BLOB_SAS_TOKEN=$(az storage container generate-sas \
     --account-name "${STORAGE_ACCOUNT_NAME}" \
     --name "${BLOB_CONTAINER_NAME}" \
-    --permissions "rwdl" \
+    --permissions "wc" \
     --expiry "${EXPIRY_DATE}" \
     --output tsv)
 
@@ -85,5 +85,13 @@ echo "- FILE_SHARE_SAS_TOKEN"
 echo "- BLOB_SAS_TOKEN"
 echo "- SAS_EXPIRY_DATE"
 echo ""
-echo "次のコマンドでAzCopyを実行できます:"
-echo "./az-copy.sh"
+
+# 直接実行された場合の警告
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "⚠️  警告: 直接実行されています。環境変数は別のターミナルセッションでは利用できません。"
+    echo "環境変数を現在のセッションで利用するには、以下を実行してください:"
+    echo "source ./get-sas-tokens.sh"
+    echo ""
+    echo "このまま続行してAzCopyを実行する場合は:"
+    echo "./az-copy.sh"
+fi
